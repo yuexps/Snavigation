@@ -29,6 +29,11 @@
               Github
             </n-button>
           </n-space>
+          <n-space class="link" justify="center">
+            <n-button strong secondary @click="jumpTo('https://mc.msfxp.top')">
+              Minecraft
+            </n-button>
+          </n-space>
         </div>
       </div>
     </n-modal>
