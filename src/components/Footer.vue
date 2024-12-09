@@ -32,8 +32,8 @@
         </div>
         <div class="desc">
           <n-space class="link" justify="center">
-            <n-button strong secondary @click="jumpTo('http://mc.msfxp.top')">
-              Minecraft
+            <n-button strong secondary @click="jumpTo('http://home.msfxp.top')">
+              主页
             </n-button>
           </n-space>
         </div>
