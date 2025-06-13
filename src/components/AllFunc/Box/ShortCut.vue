@@ -358,7 +358,6 @@ function downloadHtmlFile() {
       content="default-src 'self'; script-src 'none'; img-src data: *; object-src 'none'"></meta>
     <TITLE>Bookmarks</TITLE>
     <H1>MSFXP-Search导航文件</H1>
-    <H2><a href="https://search.msfxp.top">打开 MSFXP Search</a></H2>
     <DL><p>
         <DT><H3 ADD_DATE="1716991740" LAST_MODIFIED="1716991740">MSFXP-Search导航文件</H3>
         <DL><p>
