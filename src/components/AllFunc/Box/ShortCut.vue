@@ -41,7 +41,7 @@
           <template #icon>
             <SvgIcon iconName="icon-add" />
           </template>
-          添加捷径
+          添加
         </n-button>
       </div>
     </Transition>
@@ -358,7 +358,7 @@ function downloadHtmlFile() {
       content="default-src 'self'; script-src 'none'; img-src data: *; object-src 'none'"></meta>
     <TITLE>Bookmarks</TITLE>
     <H1>MSFXP-Search导航文件</H1>
-
+    <H2><a href="https://search.msfxp.top">打开 MSFXP Search</a></H2>
     <DL><p>
         <DT><H3 ADD_DATE="1716991740" LAST_MODIFIED="1716991740">MSFXP-Search导航文件</H3>
         <DL><p>
@@ -377,7 +377,7 @@ function downloadHtmlFile() {
   // 设置链接的 href 属性为刚刚生成的 URL
   aLink.href = htmlStrUrl;
   // 设置下载文件的名称
-  aLink.download = "SNav导航文件.html";
+  aLink.download = "MSFXP-Search导航文件.html";
   // 触发链接的点击事件，开始下载
   aLink.click();
   // 释放之前创建的 URL 对象，释放内存
