@@ -40,6 +40,11 @@
     "translation": "https://fanyi.so.com/#",
     "icon": "search-360"
   },
+  "metaso": {
+    "name": "AI搜索",
+    "url": "https://metaso.cn/?q=",
+    "icon": "metaso"
+  },
   "weibo": {
     "name": "微博",
     "url": "https://s.weibo.com/weibo?q=",
