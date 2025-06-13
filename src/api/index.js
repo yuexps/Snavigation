@@ -23,25 +23,34 @@ export const getWeather = async (key, city) => {
   });
 };
 
-/**
- * 获取搜索建议
- * https://suggestion.baidu.com
- * @param {String} keyWord - 搜索关键字
- */
+// 获取搜索建议的函数
 export const getSearchSuggestions = async (keyWord) => {
   try {
     const encodedKeyword = encodeURIComponent(keyWord);
-    const response = await fetchJsonp(
-      `https://suggestion.baidu.com/su?wd=${encodedKeyword}&cb=json`,
-      {
-        // 回调参数
-        jsonpCallback: "cb",
-      },
-    );
-    const data = await response.json();
-    return data.s;
+    const script = document.createElement("script");
+    script.src = `https://suggestion.baidu.com/su?wd=${encodedKeyword}&cb=json`;
+    document.head.appendChild(script);
+
+    // 添加一个超时机制，避免长时间等待
+    const timeout = setTimeout(() => {
+      console.error("JSONP 请求超时");
+      document.head.removeChild(script);
+    }, 5000);
+
+    // 定义一个 Promise，用于等待回调函数执行
+    return new Promise((resolve, reject) => {
+      window.json = (data) => {
+        clearTimeout(timeout); // 清除超时
+        document.head.removeChild(script); // 移除 script 标签
+        if (Array.isArray(data.s)) {
+          resolve(data.s); // 返回搜索建议
+        } else {
+          reject(new Error("接口返回的数据格式不正确"));
+        }
+      };
+    });
   } catch (error) {
     console.error("处理搜索建议发生错误：", error);
-    return null;
+    return Promise.reject(error);
   }
 };
