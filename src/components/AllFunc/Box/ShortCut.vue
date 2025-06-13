@@ -511,11 +511,11 @@ function clickFileDom() {
     padding-left: 20px;
     .footer__btn {
       border-radius: 8px;
-      width: 80px;
+      width: 63px;
       height: 40px;
       background-color: var(--main-background-light-color);
       line-height: 40px;
-      text-align: center;
+      text-align: justify;
       cursor: pointer;
       font-size: 16px;
     }
