@@ -6,7 +6,7 @@
       <span class="anthor" @click="jumpTo(copyrightLink ?? 'https://github.com/yuexps')">
         {{ siteAnthor }}
       </span>
-      &amp; 
+      <span class="anthor">&amp;</span>
       <span class="anthor">imsyy</span>
       <span v-if="icp" class="icp" @click="jumpTo('https://beian.miit.gov.cn')">
         {{ icp }}
