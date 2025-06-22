@@ -1,7 +1,7 @@
 <template>
   <footer id="footer" @click.stop>
     <div class="copyright">
-      <span class="site-name">{{ siteName }}</span>
+     <!-- <span class="site-name">{{ siteName }}</span> -->
       <span class="year">2023 - {{ fullYear }}</span>
       <span class="anthor" @click="jumpTo(copyrightLink ?? 'https://github.com/yuexps')">
         {{ siteAnthor }}
