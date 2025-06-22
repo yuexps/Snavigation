@@ -2,7 +2,7 @@
   <footer id="footer" @click.stop>
     <div class="copyright">
      <!-- <span class="site-name">{{ siteName }}</span> -->
-      <span class="year">2023 - {{ fullYear }}</span>
+      <span class="year">2023-{{ fullYear }}</span>
       <span class="anthor" @click="jumpTo(copyrightLink ?? 'https://github.com/yuexps')">
         {{ siteAnthor }}
       </span>
@@ -89,7 +89,7 @@ const jumpTo = (url) => {
     }
     .year {
       &::before {
-        content: "@";
+        content: "©";
         opacity: 1;
         margin-right: 4px;
       }
