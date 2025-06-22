@@ -2,10 +2,11 @@
   <footer id="footer" @click.stop>
     <div class="copyright">
       <span class="site-name">{{ siteName }}</span>
-      <span class="year">{{ fullYear }}</span>
+      <span class="year">2019- {{ fullYear }}</span>
       <span class="anthor" @click="jumpTo(copyrightLink ?? 'https://github.com/yuexps')">
         {{ siteAnthor }}
       </span>
+      <span class="anthor">&amp;imssy</span>
       <span v-if="icp" class="icp" @click="jumpTo('https://beian.miit.gov.cn')">
         {{ icp }}
       </span>
