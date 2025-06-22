@@ -25,9 +25,7 @@
         </div>
         <div class="desc">
           <n-space class="link" justify="center">
-            <n-button strong secondary @click="jumpTo('https://github.com/yuexps')">
-              Github
-            </n-button>
+            <n-button strong secondary @click="jumpTo('https://home.msfxp.top')">主页</n-button>
           </n-space>
         </div>
       </div>
