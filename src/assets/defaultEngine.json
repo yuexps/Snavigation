@@ -40,10 +40,10 @@
     "translation": "https://fanyi.so.com/#",
     "icon": "search-360"
   },
-  "metaso": {
+  "wangluo": {
     "name": "AI搜索",
     "url": "https://metaso.cn/?q=",
-    "icon": "search-360"
+    "icon": "wangluo"
   },
   "weibo": {
     "name": "微博",
