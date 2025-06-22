@@ -40,7 +40,7 @@
     "translation": "https://fanyi.so.com/#",
     "icon": "search-360"
   },
-  "custom": {
+  "metaso": {
     "name": "AI搜索",
     "url": "https://metaso.cn/?q=",
     "icon": "custom"
