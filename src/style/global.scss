@@ -1,15 +1,15 @@
 :root {
-  // Apple 核心颜色 Tokens
-  --apple-primary: #0066cc; // Action Blue 全局唯一高亮/激活交互色
-  --apple-primary-focus: #0071e3;
-  --apple-primary-on-dark: #2997ff;
+  // 颜色 Tokens (Monochrome 极简无彩色高亮)
+  --apple-primary: #ffffff;
+  --apple-primary-focus: #ffffff;
+  --apple-primary-on-dark: #ffffff;
   --apple-ink: #1d1d1f;
   --apple-body: #1d1d1f;
   --apple-canvas: #ffffff;
   --apple-canvas-parchment: #f5f5f7;
   --apple-surface-pearl: #fafafc;
 
-  // Apple 圆角 Tokens
+  // 圆角 Tokens
   --rounded-none: 0px;
   --rounded-xs: 5px;
   --rounded-sm: 8px;
@@ -17,7 +17,7 @@
   --rounded-lg: 18px;
   --rounded-pill: 9999px;
 
-  // 映射并覆盖项目原有变量以全站自动应用 Apple 风格
+  // 映射并覆盖项目原有变量
   --body-background-color: #1d1d1f;
   --main-text-color: #ffffff;
   --main-text-grey-color: #cccccc;
@@ -52,8 +52,17 @@ body {
   height: 100%;
   background-color: var(--body-background-color);
   overflow: hidden;
-  font-family: "SF Pro Text", "SF Pro Display", "Inter", -apple-system, BlinkMacSystemFont, system-ui, "Segoe UI", Roboto, sans-serif;
-  font-feature-settings: "ss03"; /* 优化 Inter 的 rounded 'a' 字符 */
+  font-family:
+    "SF Pro Text",
+    "SF Pro Display",
+    "Inter",
+    -apple-system,
+    BlinkMacSystemFont,
+    system-ui,
+    "Segoe UI",
+    Roboto,
+    sans-serif;
+  font-feature-settings: "ss03";
 }
 
 #app {
@@ -71,15 +80,18 @@ body {
 // NMessage
 .n-message-container {
   top: 20px !important;
+
   .n-message-wrapper {
     border-radius: var(--rounded-pill) !important;
     backdrop-filter: blur(20px);
+
     .n-message {
       padding: 12px 28px;
       border-radius: var(--rounded-pill) !important;
       background-color: var(--main-background-light-color);
       color: var(--main-text-color);
-      .n-message__icon > * {
+
+      .n-message__icon>* {
         color: var(--main-text-color);
       }
     }
@@ -92,14 +104,18 @@ body {
   --n-bar-color: var(--apple-primary) !important;
   --n-tab-text-color-active: var(--apple-primary) !important;
   --n-tab-text-color-hover: var(--apple-primary) !important;
+
   .n-tabs-nav {
     height: 44px;
   }
+
   .n-tabs-pane-wrapper {
     height: 100%;
+
     .n-tab-pane {
       padding: 20px;
       box-sizing: border-box;
+
       &.no-padding {
         padding: 0;
       }
@@ -109,12 +125,139 @@ body {
 
 // NSwitch
 .n-switch {
-  --n-rail-color: var(--main-background-light-color) !important;
-  --n-rail-color-active: var(--apple-primary) !important;
+  --n-rail-color: rgba(255, 255, 255, 0.08) !important;
+  --n-rail-color-active: rgba(255, 255, 255, 0.28) !important;
   --n-box-shadow-focus: none !important;
+  --n-button-color: #ffffff !important;
+
+  [theme="light"] & {
+    --n-rail-color: rgba(0, 0, 0, 0.05) !important;
+    --n-rail-color-active: rgba(255, 255, 255, 0.55) !important;
+  }
+
+  .n-switch__rail {
+    backdrop-filter: blur(10px) saturate(180%) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.15) !important;
+    transition:
+      background-color 0.25s cubic-bezier(0.25, 1, 0.5, 1),
+      border-color 0.25s,
+      box-shadow 0.25s !important;
+
+    [theme="light"] & {
+      border: 1px solid rgba(0, 0, 0, 0.06) !important;
+      box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.08) !important;
+    }
+  }
+
   &.n-switch--active {
     .n-switch__rail {
-      background-color: var(--apple-primary) !important;
+      background-color: rgba(255, 255, 255, 0.28) !important;
+      border: 1px solid rgba(255, 255, 255, 0.15) !important;
+      box-shadow:
+        inset 0 1.5px 3px rgba(0, 0, 0, 0.25),
+        0 0 8px rgba(255, 255, 255, 0.1) !important;
+
+      [theme="light"] & {
+        background-color: rgba(255, 255, 255, 0.55) !important;
+        border: 1px solid rgba(0, 0, 0, 0.08) !important;
+        box-shadow:
+          inset 0 1px 3px rgba(0, 0, 0, 0.12),
+          0 1px 0 rgba(255, 255, 255, 0.6) !important;
+      }
+    }
+
+    .n-switch__button {
+      box-shadow:
+        0 3px 8px rgba(0, 0, 0, 0.22),
+        0 1px 3px rgba(0, 0, 0, 0.12),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8) !important;
+
+      [theme="light"] & {
+        box-shadow:
+          0 3px 8px rgba(0, 0, 0, 0.16),
+          0 1px 2px rgba(0, 0, 0, 0.08),
+          inset 0 1px 0 rgba(255, 255, 255, 0.9) !important;
+      }
+    }
+  }
+
+  .n-switch__button {
+    background-color: #ffffff !important;
+    box-shadow:
+      0 2px 4px rgba(0, 0, 0, 0.16),
+      inset 0 1px 0 rgba(255, 255, 255, 0.8) !important;
+    transition:
+      transform 0.25s cubic-bezier(0.25, 1, 0.5, 1),
+      box-shadow 0.25s cubic-bezier(0.25, 1, 0.5, 1) !important;
+
+    [theme="light"] & {
+      box-shadow:
+        0 2px 4px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.9) !important;
+    }
+  }
+}
+
+// NSlider
+.n-slider {
+  --n-fill-color: var(--apple-primary) !important;
+  --n-fill-color-hover: var(--apple-primary) !important;
+  --n-handle-color: var(--apple-primary) !important;
+  --n-handle-box-shadow-hover: 0 0 0 2px var(--main-background-hover-color) !important;
+  --n-handle-box-shadow-active: 0 0 0 2px var(--main-background-hover-color) !important;
+  --n-handle-box-shadow-focus: 0 0 0 2px var(--main-background-hover-color) !important;
+  --n-indicator-color: var(--main-background-light-color) !important;
+  --n-indicator-text-color: var(--main-text-color) !important;
+}
+
+// NInput
+.n-input {
+  --n-border-hover: 1px solid var(--apple-primary) !important;
+  --n-border-focus: 1px solid var(--apple-primary) !important;
+  --n-box-shadow-focus: 0 0 0 2px rgba(255, 255, 255, 0.2) !important;
+  --n-caret-color: var(--apple-primary) !important;
+  --n-loading-color: var(--apple-primary) !important;
+
+  .n-input__border,
+  .n-input__state-border {
+    transition:
+      border-color 0.25s,
+      box-shadow 0.25s;
+  }
+}
+
+// NBaseSelection
+.n-base-selection {
+  --n-border-hover: 1px solid var(--apple-primary) !important;
+  --n-border-focus: 1px solid var(--apple-primary) !important;
+  --n-border-active: 1px solid var(--apple-primary) !important;
+  --n-box-shadow-focus: 0 0 0 2px rgba(255, 255, 255, 0.2) !important;
+  --n-box-shadow-active: 0 0 0 2px rgba(255, 255, 255, 0.2) !important;
+  --n-caret-color: var(--apple-primary) !important;
+}
+
+// NBaseSelectMenu
+.n-base-select-menu {
+  --n-option-color-active: var(--main-background-light-color) !important;
+  --n-option-color-pending: var(--main-background-hover-color) !important;
+  --n-option-text-color-active: var(--apple-primary) !important;
+  --n-option-text-color-pending: var(--main-text-color) !important;
+  --n-color: var(--main-background-light-color) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  backdrop-filter: blur(20px);
+
+  [theme="light"] & {
+    border: 1px solid rgba(0, 0, 0, 0.06) !important;
+  }
+}
+
+.n-base-select-option {
+  &.n-base-select-option--active {
+    color: var(--apple-primary) !important;
+
+    .n-base-select-option__check {
+      color: var(--apple-primary) !important;
     }
   }
 }
@@ -131,6 +274,7 @@ body {
   .n-modal-mask {
     backdrop-filter: blur(40px);
   }
+
   // n-dialog
   .n-dialog {
     border-radius: var(--rounded-lg) !important;
@@ -138,17 +282,21 @@ body {
     --n-icon-color: var(--main-text-color);
     --n-color: var(--main-background-light-color);
     border: 1px solid rgba(255, 255, 255, 0.08);
+
     .n-dialog__title {
       font-weight: bold;
       font-size: 18px;
+
       .n-dialog__icon {
         font-size: 24px;
         margin-right: 8px;
       }
     }
+
     .n-dialog__content {
       font-size: 15px;
     }
+
     .n-button {
       height: auto;
       padding: 9px 18px;
@@ -167,6 +315,7 @@ body {
       --n-color-hover: var(--main-background-hover-color);
     }
   }
+
   .n-modal {
     width: 60vw;
     max-width: 700px;
@@ -233,10 +382,12 @@ body {
   0% {
     opacity: 0;
   }
+
   30% {
     opacity: 0;
     transform: translateY(30px);
   }
+
   100% {
     opacity: 1;
     transform: translateY(0);
@@ -247,10 +398,12 @@ body {
   0% {
     opacity: 0;
   }
+
   20% {
     opacity: 0;
     transform: translateY(-90px);
   }
+
   100% {
     opacity: 1;
     transform: translateY(-140px);
@@ -262,6 +415,7 @@ body {
     filter: blur(calc(var(--blur) + 20px)) brightness(0.4);
     transform: scale(1.5);
   }
+
   to {
     filter: blur(var(--blur)) brightness(1);
     transform: scale(1.2);
@@ -272,9 +426,11 @@ body {
   0% {
     opacity: 0.8;
   }
+
   70% {
     opacity: 0.8;
   }
+
   100% {
     opacity: 0.2;
   }
@@ -284,9 +440,11 @@ body {
   0% {
     transform: scale(1);
   }
+
   50% {
     transform: scale(1.1);
   }
+
   100% {
     transform: scale(1);
   }
@@ -294,8 +452,11 @@ body {
 
 // 文本选中
 ::selection {
-  color: var(--main-text-color);
-  background-color: var(--apple-primary);
+  background-color: rgba(255, 255, 255, 0.25);
+}
+
+[theme="light"] ::selection {
+  background-color: rgba(0, 0, 0, 0.15);
 }
 
 // 滚动条
@@ -306,20 +467,31 @@ body {
   }
 }
 
-// ==========================================
-// Apple 极简主义设计风格覆盖 (DESIGN.md)
-// ==========================================
-
 // 时钟与大字排版优化
 .weather-time {
   .time {
-    font-family: "SF Pro Display", "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif !important;
+    font-family:
+      "SF Pro Display",
+      "Inter",
+      -apple-system,
+      BlinkMacSystemFont,
+      system-ui,
+      sans-serif !important;
     font-weight: 600 !important;
     letter-spacing: -0.025em !important;
     text-shadow: none !important;
   }
-  .date, .lunar, .weather {
-    font-family: "SF Pro Text", "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif !important;
+
+  .date,
+  .lunar,
+  .weather {
+    font-family:
+      "SF Pro Text",
+      "Inter",
+      -apple-system,
+      BlinkMacSystemFont,
+      system-ui,
+      sans-serif !important;
     text-shadow: none !important;
   }
 }
@@ -329,7 +501,7 @@ body {
   border-radius: var(--rounded-lg) !important;
   border: 1px solid rgba(255, 255, 255, 0.08) !important;
   box-shadow: none !important;
-  
+
   // 设置单项大卡片优化
   :deep(.set-item) {
     border-radius: var(--rounded-lg) !important;
@@ -355,39 +527,43 @@ body {
     .n-dialog {
       border: 1px solid rgba(0, 0, 0, 0.06) !important;
     }
+
     .n-modal {
       border: 1px solid rgba(0, 0, 0, 0.06) !important;
     }
   }
+
   .n-dropdown {
     border: 1px solid rgba(0, 0, 0, 0.06) !important;
   }
+
   .main-box {
     border: 1px solid rgba(0, 0, 0, 0.06) !important;
+
     :deep(.set-item) {
       border: 1px solid rgba(0, 0, 0, 0.04) !important;
       background-color: rgba(0, 0, 0, 0.01) !important;
     }
+
     :deep(.shortcut-item) {
       border: 1px solid rgba(0, 0, 0, 0.03) !important;
     }
   }
 }
 
-// 全局苹果物理压感微交互
+// 全局物理压感微交互
 .n-button,
 .shortcut-item,
 .footer__btn,
 .change-status,
 .engine,
 .go {
-  transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1), background-color 0.25s, border-color 0.25s !important;
+  transition:
+    transform 0.2s cubic-bezier(0.25, 1, 0.5, 1),
+    background-color 0.25s,
+    border-color 0.25s !important;
+
   &:active {
     transform: scale(0.95) !important;
   }
-}
-
-// 选中的壁纸边框使用 Action Blue
-.cover-selete .item.check {
-  border: 2.5px solid var(--apple-primary) !important;
 }

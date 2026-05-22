@@ -11,7 +11,9 @@
         <div :key="hitokotoData.id || 'loading'" class="hitokoto-content">
           <span class="text">{{ hitokotoData.hitokoto ?? "正在聆听世界的声音..." }}</span>
           <span class="author" :class="{ show: hitokotoData.from }">
-            —— {{ hitokotoData.from_who ? hitokotoData.from_who + ' ' : '' }}《{{ hitokotoData.from }}》
+            —— {{ hitokotoData.from_who ? hitokotoData.from_who + " " : "" }}《{{
+              hitokotoData.from
+            }}》
           </span>
         </div>
       </Transition>

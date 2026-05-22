@@ -7,7 +7,6 @@
           <n-card class="set-item">
             <div class="name">
               <span class="title">主题类别</span>
-              <span class="tip">切换全站主题类别</span>
             </div>
             <n-select class="set" v-model:value="themeType" :options="themeTypeOptions" />
           </n-card>
@@ -18,77 +17,55 @@
               alignItems: 'flex-start',
             }"
           >
-            <div class="desc">
-              <div class="name">
-                <span class="title">壁纸偏好</span>
-                <span class="tip"> 除默认以外的其他选项可能会导致页面载入缓慢 </span>
-              </div>
-              <n-space>
-                <Transition name="fade" mode="out-in">
-                  <n-button
-                    v-if="backgroundType !== 0"
-                    strong
-                    secondary
-                    @click="changeBackground(0, true)"
-                  >
-                    恢复默认
-                  </n-button>
-                </Transition>
-                <n-button strong secondary @click="customCoverModal = true">
-                  <template v-if="backgroundType === 4" #icon>
-                    <SvgIcon iconName="icon-confirm" />
-                  </template>
-                  {{ backgroundType === 4 ? "已开启自定义" : "自定义" }}
-                </n-button>
-              </n-space>
+            <div class="name">
+              <span class="title">壁纸偏好</span>
             </div>
             <n-grid
               class="cover-selete"
               responsive="screen"
-              cols="2 s:3 m:4 l:4"
+              cols="1 s:3 m:3 l:3"
               :x-gap="16"
               :y-gap="16"
             >
+              <!-- 本地默认 -->
               <n-grid-item
-                v-for="(item, index) in backgroundTypeArr"
-                :key="index"
-                :class="index === backgroundType ? 'item check' : 'item'"
-                @click="changeBackground(index)"
+                :class="backgroundType === 0 ? 'item check' : 'item'"
+                @click="handleWallpaperClick(0)"
               >
-                <span class="name" v-html="item.name" />
+                <span class="name">本地默认</span>
+              </n-grid-item>
+
+              <!-- 每日一图 -->
+              <n-grid-item
+                :class="backgroundType === 1 ? 'item check' : 'item'"
+                @click="handleWallpaperClick(1)"
+              >
+                <span class="name">每日一图</span>
+              </n-grid-item>
+
+              <!-- 自定义壁纸 -->
+              <n-grid-item
+                :class="['item', 'custom-wallpaper-item', backgroundType === 4 ? 'check' : null]"
+                @click="handleWallpaperClick(4)"
+              >
+                <span class="name">自定义壁纸</span>
+                <div class="edit-icon" @click.stop="customCoverModal = true" title="配置自定义壁纸">
+                  <SvgIcon iconName="icon-setting" />
+                </div>
               </n-grid-item>
             </n-grid>
           </n-card>
           <n-h6 prefix="bar"> 搜索 </n-h6>
-          <n-card class="set-item">
-            <div class="name">
-              <span class="title">搜索引擎</span>
-              <span class="tip">切换或自定义搜索引擎</span>
-            </div>
-            <n-button
-              strong
-              secondary
-              @click="
-                () => {
-                  status.setSiteStatus('focus');
-                  status.setEngineChangeStatus(true);
-                }
-              "
-            >
-              前往调整
-            </n-button>
-          </n-card>
+
           <n-card class="set-item">
             <div class="name">
               <span class="title">搜索建议</span>
-              <span class="tip">是否显示搜索建议</span>
             </div>
             <n-switch v-model:value="showSuggestions" :round="false" />
           </n-card>
           <n-card class="set-item">
             <div class="name">
               <span class="title">跳转方式</span>
-              <span class="tip">全站链接跳转方式</span>
             </div>
             <n-select class="set" v-model:value="urlJumpType" :options="urlJumpTypeOptions" />
           </n-card>
@@ -100,14 +77,12 @@
           <n-card class="set-item">
             <div class="name">
               <span class="title">壁纸遮罩</span>
-              <span class="tip">壁纸周围是否显示暗色遮罩</span>
             </div>
             <n-switch v-model:value="showBackgroundGray" :round="false" />
           </n-card>
           <n-card class="set-item">
             <div class="name">
               <span class="title">壁纸模糊</span>
-              <span class="tip">调整壁纸高斯模糊的程度</span>
             </div>
             <n-slider
               class="set"
@@ -122,35 +97,30 @@
           <n-card class="set-item">
             <div class="name">
               <span class="title">天气显示</span>
-              <span class="tip">是否在首页时间下展示天气</span>
             </div>
             <n-switch v-model:value="showWeather" :round="false" />
           </n-card>
           <n-card class="set-item">
             <div class="name">
               <span class="title">一言显示</span>
-              <span class="tip">是否在首页底部展示一言名句</span>
             </div>
             <n-switch v-model:value="showHitokoto" :round="false" />
           </n-card>
           <n-card class="set-item">
             <div class="name">
               <span class="title">时钟样式</span>
-              <span class="tip">选择一种时钟样式</span>
             </div>
             <n-select class="set" v-model:value="timeStyle" :options="timeStyleOptions" />
           </n-card>
           <n-card v-if="timeStyle === 'one'" class="set-item">
             <div class="name">
               <span class="title">时间显秒</span>
-              <span class="tip">是否在分钟后面显示秒数</span>
             </div>
             <n-switch v-model:value="showSeconds" :round="false" />
           </n-card>
           <n-card class="set-item">
             <div class="name">
               <span class="title">时钟显零</span>
-              <span class="tip">是否在时钟小于 10 时补 0</span>
             </div>
             <n-switch v-model:value="showZeroTime" :round="false" />
           </n-card>
@@ -170,21 +140,18 @@
           <n-card class="set-item">
             <div class="name">
               <span class="title">自动收缩</span>
-              <span class="tip">是否在非搜索状态时收起搜索框</span>
             </div>
             <n-switch v-model:value="smallInput" :round="false" />
           </n-card>
           <n-card class="set-item">
             <div class="name">
               <span class="title">自动聚焦</span>
-              <span class="tip">打开网站时自动聚焦搜索框</span>
             </div>
             <n-switch v-model:value="autoFocus" :round="false" />
           </n-card>
           <n-card class="set-item">
             <div class="name">
               <span class="title">自动失焦</span>
-              <span class="tip">跳转搜索后搜索框自动失焦</span>
             </div>
             <n-switch v-model:value="autoInputBlur" :round="false" />
           </n-card>
@@ -192,27 +159,25 @@
       </n-tab-pane>
       <n-tab-pane name="other" tab="其他设置">
         <n-scrollbar class="scrollbar">
-          <n-h6 prefix="bar"> 重置 </n-h6>
+          <n-h6 prefix="bar"> 数据管理 </n-h6>
           <n-card class="set-item">
             <div class="name">
-              <span class="title">站点重置</span>
+              <span class="title">清除全站数据</span>
               <span class="tip">若站点显示异常或出现问题时可尝试此操作</span>
             </div>
-            <n-button strong secondary @click="resetSite"> 重置 </n-button>
+            <n-button strong secondary @click="resetSite"> 清除全站数据 </n-button>
           </n-card>
-          <n-h6 prefix="bar"> 备份 </n-h6>
           <n-card class="set-item">
             <div class="name">
-              <span class="title">站点备份</span>
-              <span class="tip">将站点配置及个性化内容进行备份</span>
+              <span class="title">备份当前配置</span>
+              <span class="tip">将当前站点的个性化配置导出为备份文件</span>
             </div>
-            <n-button strong secondary @click="backupSite"> 备份 </n-button>
+            <n-button strong secondary @click="backupSite"> 备份当前配置 </n-button>
           </n-card>
-          <n-h6 prefix="bar"> 恢复 </n-h6>
           <n-card class="set-item">
             <div class="name">
-              <span class="title">数据恢复</span>
-              <span class="tip">将备份的站点内容进行恢复</span>
+              <span class="title">恢复备份数据</span>
+              <span class="tip">从备份的配置文件中恢复您的个性化设置</span>
             </div>
             <input
               ref="recoverRef"
@@ -221,7 +186,23 @@
               accept=".json"
               @change="recoverSite"
             />
-            <n-button strong secondary @click="recoverRef?.click()"> 恢复 </n-button>
+            <n-button strong secondary @click="recoverRef?.click()"> 恢复备份数据 </n-button>
+          </n-card>
+          <n-h6 prefix="bar"> 快捷网址 </n-h6>
+          <n-card class="set-item">
+            <div class="name">
+              <span class="title">导出快捷网址</span>
+              <span class="tip">将快捷网址列表导出为书签 HTML 文件</span>
+            </div>
+            <n-button strong secondary @click="downloadShortcutFile"> 导出快捷网址 </n-button>
+          </n-card>
+          <n-card class="set-item">
+            <div class="name">
+              <span class="title">导入快捷网址</span>
+              <span class="tip">从书签 HTML 文件中导入快捷网址</span>
+            </div>
+            <input ref="shortCutUploadRef" type="file" style="display: none" accept=".html" @change="uploadShortcutFile" />
+            <n-button strong secondary @click="clickShortcutUpload"> 导入快捷网址 </n-button>
           </n-card>
         </n-scrollbar>
       </n-tab-pane>
@@ -269,11 +250,13 @@ import {
   NSlider,
 } from "naive-ui";
 import { storeToRefs } from "pinia";
-import { setStore, statusStore } from "@/stores";
+import { setStore, statusStore, siteStore } from "@/stores";
 import identifyInput from "@/utils/identifyInput";
 
 const set = setStore();
 const status = statusStore();
+const site = siteStore();
+const { shortcutData } = storeToRefs(site);
 const {
   themeType,
   backgroundType,
@@ -297,12 +280,6 @@ const recoverRef = ref(null);
 const customCoverModal = ref(false);
 const customCoverUrl = ref("");
 
-// 壁纸类别
-const backgroundTypeArr = [
-  { name: "本地默认", tip: "默认壁纸，随机更换" },
-  { name: "每日一图", tip: "必应每日一图，每天更新" },
-];
-
 // 主题类别
 const themeTypeOptions = [
   {
@@ -316,22 +293,22 @@ const themeTypeOptions = [
 ];
 
 // 切换壁纸
-const changeBackground = (type, reset = false) => {
-  if (reset) {
-    $dialog.warning({
-      title: "壁纸恢复",
-      content: "确认恢复默认壁纸？若当前为自定义壁纸，你的自定义壁纸将丢失！",
-      positiveText: "恢复",
-      negativeText: "取消",
-      onPositiveClick: () => {
-        backgroundType.value = 0;
-        $message.info("已恢复为默认壁纸，刷新后生效");
-      },
-    });
-    return true;
+const handleWallpaperClick = (type) => {
+  if (type === 0) {
+    backgroundType.value = 0;
+    $message.success("已切换为本地默认，刷新后生效");
+  } else if (type === 1) {
+    backgroundType.value = 1;
+    $message.success("已切换为每日一图，刷新后生效");
+  } else if (type === 4) {
+    if (backgroundCustom.value) {
+      backgroundType.value = 4;
+      $message.success("已切换为自定义壁纸，刷新后生效");
+    } else {
+      $message.info("无自定义数据，请配置");
+      customCoverModal.value = true;
+    }
   }
-  backgroundType.value = type;
-  $message.success(`已切换为${backgroundTypeArr[type].name}，刷新后生效`);
 };
 
 // 链接跳转方式
@@ -450,51 +427,178 @@ const recoverSite = async () => {
   }
 };
 
+// 导出快捷网址为书签 HTML
+function downloadShortcutFile() {
+  let DTinnerStr = "";
+  shortcutData.value.forEach((item) => {
+    DTinnerStr += `<DT><A HREF="${item.url}" >${item.name}</A> \n`;
+  });
+  const htmlStr = `
+    <!DOCTYPE NETSCAPE-Bookmark-file-1>
+    <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8">
+    <meta http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'none'; img-src data: *; object-src 'none'"></meta>
+    <TITLE>Bookmarks</TITLE>
+    <H1>MSFXP-Search导航文件</H1>
+    <DL><p>
+        <DT><H3 ADD_DATE="1716991740" LAST_MODIFIED="1716991740">MSFXP-Search导航文件</H3>
+        <DL><p>
+            ${DTinnerStr}
+        </DL><p>
+    </DL>
+  `;
+  const blob = new Blob([htmlStr], { type: "text/html" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "MSFXP-Search导航文件.html";
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+// 导入快捷网址（解析书签 HTML）
+function uploadShortcutFile(event) {
+  const files = event.target.files;
+  if (files && files.length > 0) {
+    const fileReader = new FileReader();
+    fileReader.readAsText(files[0]);
+    fileReader.onload = function () {
+      if (typeof fileReader.result === "string") {
+        parserBookmarksFile(fileReader.result);
+      }
+    };
+    // 清空以允许重复选择同一文件
+    event.target.value = null;
+  }
+}
+
+function parserBookmarksFile(result) {
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(result, "text/html");
+  const aElements = doc.querySelectorAll("a");
+  aElements.forEach((a) => {
+    const isDuplicate = shortcutData.value?.some(
+      (item) => item.name === a.textContent || item.url === a.href,
+    );
+    if (isDuplicate) return;
+    shortcutData.value.push({
+      id: shortcutData.value.length,
+      name: a.textContent,
+      url: a.href,
+    });
+  });
+  $message.success("快捷网址导入成功");
+}
+
+const shortCutUploadRef = ref(null);
+function clickShortcutUpload() {
+  shortCutUploadRef.value?.click();
+}
+
 onMounted(() => {
   // 检测是否存在自定义壁纸
   if (backgroundCustom.value) customCoverUrl.value = backgroundCustom.value;
 });
+
 </script>
 
 <style lang="scss">
 .cover-selete {
-  margin-top: 12px;
+  margin-top: 16px;
   .item {
     cursor: pointer;
     position: relative;
     width: 100%;
-    height: 40px;
+    height: 42px;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 8px;
-    background-color: var(--main-background-light-color);
+    border-radius: var(--rounded-pill) !important;
+    background-color: rgba(255, 255, 255, 0.06) !important;
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+    box-sizing: border-box;
     transition:
-      background-color 0.3s,
-      box-shadow 0.3s;
+      transform 0.2s cubic-bezier(0.25, 1, 0.5, 1),
+      background-color 0.25s,
+      border-color 0.25s,
+      box-shadow 0.25s !important;
+
+    .name {
+      font-size: 13.5px;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.72) !important;
+      transition: color 0.25s;
+    }
+
     &.check {
-      background-color: var(--main-background-hover-color);
-      &::before {
-        content: "";
+      background-color: rgba(255, 255, 255, 0.12) !important;
+      border: 1.5px solid var(--apple-primary) !important;
+
+      .name {
+        color: var(--apple-primary) !important;
+      }
+    }
+
+    &.custom-wallpaper-item {
+      position: relative;
+      .edit-icon {
         position: absolute;
-        border-radius: 12px;
-        top: -4px;
-        left: -4px;
-        right: -4px;
-        bottom: -4px;
-        border: 2px solid var(--main-background-hover-color);
-        transition: opacity 0.3s;
-      }
-    }
-    &:hover {
-      background-color: var(--main-background-hover-color);
-      box-shadow: 0 0 0px 2px var(--main-background-hover-color);
-      &::before {
+        right: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.08);
         opacity: 0;
+        transform: scale(0.8);
+        transition:
+          opacity 0.2s,
+          transform 0.2s,
+          background-color 0.2s;
+        z-index: 2;
+
+        .i-icon {
+          margin-right: 0 !important;
+          font-size: 13px;
+          color: rgba(255, 255, 255, 0.7);
+        }
+
+        &:hover {
+          background-color: rgba(255, 255, 255, 0.18);
+          .i-icon {
+            color: #ffffff;
+          }
+        }
+      }
+
+      &:hover {
+        .edit-icon {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      @media (max-width: 798px) {
+        .edit-icon {
+          opacity: 0.85;
+          transform: scale(1);
+        }
       }
     }
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.12) !important;
+      border-color: rgba(255, 255, 255, 0.15) !important;
+
+      .name {
+        color: #ffffff !important;
+      }
+    }
+
     &:active {
-      box-shadow: none;
+      transform: scale(0.95) !important;
     }
   }
 }

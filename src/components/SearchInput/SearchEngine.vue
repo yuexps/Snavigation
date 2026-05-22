@@ -13,12 +13,20 @@
             <span class="name">{{ item.name }}</span>
           </n-grid-item>
           <n-grid-item
-            :class="['engine', 'custom-engine-item', set.searchEngine === 'custom' ? 'choose' : null]"
+            :class="[
+              'engine',
+              'custom-engine-item',
+              set.searchEngine === 'custom' ? 'choose' : null,
+            ]"
             @click="customEngineClick"
           >
             <SvgIcon iconName="icon-custom" />
             <span class="name">自定义</span>
-            <div class="edit-icon" @click.stop="customEngineModal = true" title="配置自定义搜索引擎">
+            <div
+              class="edit-icon"
+              @click.stop="customEngineModal = true"
+              title="配置自定义搜索引擎"
+            >
               <SvgIcon iconName="icon-setting" />
             </div>
           </n-grid-item>
@@ -174,7 +182,7 @@ const setCustomEngine = () => {
         white-space: nowrap;
       }
       &.choose {
-        background-color: rgba(0, 102, 204, 0.12) !important;
+        background-color: rgba(255, 255, 255, 0.12) !important;
         border: 1.5px solid var(--apple-primary) !important;
         color: var(--apple-primary) !important;
         &::before {

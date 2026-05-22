@@ -45,7 +45,7 @@ const setBgUrl = async () => {
         if (!response.ok) {
           throw new Error(`必应 API 响应异常: ${response.status}`);
         }
-        
+
         const data = await response.json();
         if (data && data.url) {
           bgUrl.value = data.url;
@@ -133,7 +133,8 @@ onBeforeUnmount(() => {
     top: 0;
     width: 100%;
     height: 100%;
-    background-image: radial-gradient(rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0.5) 100%),
+    background-image:
+      radial-gradient(rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0.5) 100%),
       radial-gradient(rgba(0, 0, 0, 0) 33%, rgba(0, 0, 0, 0.3) 166%);
   }
 }
