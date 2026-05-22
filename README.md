@@ -32,6 +32,8 @@
 
 ### 鸣谢
 
+原项目：https://github.com/imsyy/home
+
 本站部分样式及功能参考自
 
 - [青柠起始页](https://limestart.cn/)
