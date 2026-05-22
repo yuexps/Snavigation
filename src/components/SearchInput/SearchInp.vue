@@ -196,7 +196,7 @@ const changeEngine = () => {
     justify-content: space-between;
     height: 42px;
     width: 100%;
-    border-radius: 30px;
+    border-radius: var(--rounded-pill) !important;
     color: var(--main-text-color);
     background-color: var(--main-background-color);
     backdrop-filter: blur(10px);
@@ -236,7 +236,7 @@ const changeEngine = () => {
       height: 100%;
       width: 64px;
       font-size: 20px;
-      border-radius: 30px;
+      border-radius: var(--rounded-pill) !important;
       transition:
         background-color 0.3s,
         opacity 0.3s;

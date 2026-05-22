@@ -139,7 +139,8 @@ const setCustomEngine = () => {
   color: var(--main-text-color);
   background-color: var(--main-background-light-color);
   backdrop-filter: blur(30px) saturate(1.25);
-  border-radius: 16px;
+  border-radius: var(--rounded-lg) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08);
   box-sizing: border-box;
   z-index: 1;
   .all-engine {
@@ -160,6 +161,8 @@ const setCustomEngine = () => {
       background-color: var(--main-background-light-color);
       transition:
         background-color 0.3s,
+        border-color 0.3s,
+        color 0.3s,
         box-shadow 0.3s;
       .i-icon {
         margin-right: 12px;
@@ -171,17 +174,11 @@ const setCustomEngine = () => {
         white-space: nowrap;
       }
       &.choose {
-        background-color: var(--main-background-hover-color);
+        background-color: rgba(0, 102, 204, 0.12) !important;
+        border: 1.5px solid var(--apple-primary) !important;
+        color: var(--apple-primary) !important;
         &::before {
-          content: "";
-          position: absolute;
-          border-radius: 14px;
-          top: -4px;
-          left: -4px;
-          right: -4px;
-          bottom: -4px;
-          border: 2px solid var(--main-background-hover-color);
-          transition: opacity 0.3s;
+          display: none;
         }
       }
       &:hover {

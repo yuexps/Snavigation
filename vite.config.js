@@ -17,7 +17,7 @@ export default defineConfig({
         cleanupOutdatedCaches: true,
         runtimeCaching: [
           {
-            urlPattern: /^https:\/\/[a-zA-Z0-9-.]*bing\.com\/.*/i,
+            urlPattern: /^https:\/\/[a-zA-Z0-9-.]*(bing\.com|dujin\.org)\/.*/i,
             handler: "NetworkOnly",
           },
           {

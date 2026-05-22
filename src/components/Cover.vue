@@ -32,14 +32,31 @@ const emit = defineEmits(["loadComplete"]);
 const bgRandom = Math.floor(Math.random() * 3 + 1);
 
 // 赋值壁纸
-const setBgUrl = () => {
+const setBgUrl = async () => {
   const { backgroundType } = set;
   switch (backgroundType) {
     case 0:
       bgUrl.value = `/background/bg${bgRandom}.jpg`;
       break;
     case 1:
-      bgUrl.value = "https://cn.bing.com/HPImageArchive.aspx?format=image&idx=0&n=1&mkt=zh-CN";
+      try {
+        // 请求部署在腾讯云 EdgeOne 上的专属无跨域限制 API
+        const response = await fetch("https://bing-pic.msfxp.top/");
+        if (!response.ok) {
+          throw new Error(`必应 API 响应异常: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        if (data && data.url) {
+          bgUrl.value = data.url;
+          console.log("成功通过必应 API 获取壁纸直链：", bgUrl.value);
+        } else {
+          throw new Error("JSON 响应中未包含 url 字段");
+        }
+      } catch (error) {
+        console.warn("必应 API 获取失败，已降级到本地默认壁纸：", error.message);
+        bgUrl.value = `/background/bg${bgRandom}.jpg`;
+      }
       break;
     case 4:
       bgUrl.value = set.backgroundCustom;
