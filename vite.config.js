@@ -17,6 +17,10 @@ export default defineConfig({
         cleanupOutdatedCaches: true,
         runtimeCaching: [
           {
+            urlPattern: /^https:\/\/[a-zA-Z0-9-.]*bing\.com\/.*/i,
+            handler: "NetworkOnly",
+          },
+          {
             urlPattern: /(.*?)\.(woff2|woff|ttf)/,
             handler: "CacheFirst",
             options: {

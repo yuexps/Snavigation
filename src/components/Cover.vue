@@ -5,6 +5,7 @@
       class="background"
       alt="background"
       :src="bgUrl"
+      referrerpolicy="no-referrer"
       :style="{ '--blur': set.backgroundBlur + 'px' }"
       @load="imgLoadComplete"
       @error.once="imgLoadError"

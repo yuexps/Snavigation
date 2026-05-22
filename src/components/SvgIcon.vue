@@ -1,5 +1,9 @@
 <template>
-  <svg :class="svgClass" aria-hidden="true">
+  <svg v-if="iconName === 'icon-metaso'" :class="svgClass" viewBox="0 0 1024 1024" aria-hidden="true">
+    <path d="M512 85.333c0 235.644 191.022 426.667 426.667 426.667-235.644 0-426.667 191.022-426.667 426.667 0-235.644-191.022-426.667-426.667-426.667 235.644 0 426.667-191.022 426.667-426.667z" fill="currentColor"/>
+    <path d="M768 128c0 70.693 57.307 128 128 128-70.693 0-128 57.307-128 128 0-70.693-57.307-128-128-128 70.693 0 128-57.307 128-128z" fill="currentColor"/>
+  </svg>
+  <svg v-else :class="svgClass" aria-hidden="true">
     <use :xlink:href="iconClassName" />
   </svg>
 </template>

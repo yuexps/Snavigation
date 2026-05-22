@@ -13,15 +13,14 @@
             <span class="name">{{ item.name }}</span>
           </n-grid-item>
           <n-grid-item
-            :class="['engine', set.searchEngine === 'custom' ? 'choose' : null]"
+            :class="['engine', 'custom-engine-item', set.searchEngine === 'custom' ? 'choose' : null]"
             @click="customEngineClick"
           >
             <SvgIcon iconName="icon-custom" />
             <span class="name">自定义</span>
-          </n-grid-item>
-          <n-grid-item class="engine" @click="customEngineModal = true">
-            <SvgIcon iconName="icon-custom" />
-            <span class="name">自定义配置</span>
+            <div class="edit-icon" @click.stop="customEngineModal = true" title="配置自定义搜索引擎">
+              <SvgIcon iconName="icon-setting" />
+            </div>
           </n-grid-item>
         </n-grid>
       </n-scrollbar>
@@ -194,6 +193,46 @@ const setCustomEngine = () => {
       }
       &:active {
         box-shadow: none;
+      }
+      &.custom-engine-item {
+        position: relative;
+        .edit-icon {
+          position: absolute;
+          right: 12px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 24px;
+          height: 24px;
+          border-radius: 50%;
+          background-color: var(--main-background-light-color);
+          opacity: 0;
+          transform: scale(0.8);
+          transition:
+            opacity 0.2s,
+            transform 0.2s,
+            background-color 0.2s;
+          z-index: 2;
+          .i-icon {
+            margin-right: 0 !important;
+            font-size: 14px;
+          }
+          &:hover {
+            background-color: var(--main-background-hover-color);
+          }
+        }
+        &:hover {
+          .edit-icon {
+            opacity: 1;
+            transform: scale(1);
+          }
+        }
+        @media (max-width: 798px) {
+          .edit-icon {
+            opacity: 0.8;
+            transform: scale(1);
+          }
+        }
       }
     }
     @media (max-width: 798px) {
