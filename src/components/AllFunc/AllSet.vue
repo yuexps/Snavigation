@@ -128,6 +128,13 @@
           </n-card>
           <n-card class="set-item">
             <div class="name">
+              <span class="title">一言显示</span>
+              <span class="tip">是否在首页底部展示一言名句</span>
+            </div>
+            <n-switch v-model:value="showHitokoto" :round="false" />
+          </n-card>
+          <n-card class="set-item">
+            <div class="name">
               <span class="title">时钟样式</span>
               <span class="tip">选择一种时钟样式</span>
             </div>
@@ -282,6 +289,7 @@ const {
   showZeroTime,
   use12HourFormat,
   showSuggestions,
+  showHitokoto,
   urlJumpType,
   timeStyle,
 } = storeToRefs(set);
@@ -293,8 +301,6 @@ const customCoverUrl = ref("");
 const backgroundTypeArr = [
   { name: "本地默认", tip: "默认壁纸，随机更换" },
   { name: "每日一图", tip: "必应每日一图，每天更新" },
-  //{ name: "随机风景", tip: "随机风景图，随机更换" },
-  //{ name: "随机动漫", tip: "随机二次元图，随机更换" },
 ];
 
 // 主题类别
@@ -358,7 +364,7 @@ const setCustomCover = () => {
     backgroundType.value = 4;
     backgroundCustom.value = customCoverUrl.value;
     customCoverModal.value = false;
-    $message.error("已切换为自定义壁纸，刷新后生效");
+    $message.success("已切换为自定义壁纸，刷新后生效");
   } else {
     $message.error("请输入正确的网址");
   }

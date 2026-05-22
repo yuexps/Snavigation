@@ -6,7 +6,7 @@ const useSetDataStore = defineStore("setData", {
       // 主题类别
       themeType: "light",
       // 壁纸类别
-      // 0 本地 / 1 必应 / 2 随机风景 / 3 随机动漫 / 4 自定义
+      // 0 本地 / 1 必应 / 4 自定义
       backgroundType: 0,
       backgroundCustom: "",
       // 壁纸遮罩
@@ -39,6 +39,8 @@ const useSetDataStore = defineStore("setData", {
       showWeather: true,
       // 是否显示搜索建议
       showSuggestions: true,
+      // 是否显示一言
+      showHitokoto: true,
       // 跳转方式
       // open 新标签页 / href 当前页面
       urlJumpType: "open",

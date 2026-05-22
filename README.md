@@ -15,7 +15,7 @@
 - [x] 设置
 - [x] 备份
 
-* [ ] 一言
+- [x] 一言
 * [ ] 书签
 * [ ] 备忘
 
@@ -28,8 +28,6 @@
 
 ### API
 
-- [小歪 API](https://api.ixiaowai.cn/)
-- [缙哥哥 API](https://www.dujin.org/3618.html)
 - [Hitokoto 一言](https://hitokoto.cn/)
 
 ### 鸣谢

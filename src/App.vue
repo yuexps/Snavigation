@@ -17,6 +17,7 @@
         <WeatherTime />
         <SearchInp @contextmenu.stop />
         <AllFunc @contextmenu.stop />
+        <Hitokoto />
         <Footer />
         <!-- 状态切换 -->
         <Transition name="fade">
@@ -51,12 +52,10 @@
           </div>
         </Transition>
       </main>
-      <!--
       <div v-else id="loading">
         <img src="/icon/logo.png" alt="logo" class="logo" />
         <span class="tip">加载中</span>
       </div>
-      -->
     </Transition>
   </Provider>
 </template>
@@ -71,6 +70,7 @@ import WeatherTime from "@/components/WeatherTime.vue";
 import SearchInp from "@/components/SearchInput/SearchInp.vue";
 import AllFunc from "@/components/AllFunc/AllFunc.vue";
 import Footer from "@/components/Footer.vue";
+import Hitokoto from "@/components/Hitokoto.vue";
 
 const set = setStore();
 const status = statusStore();

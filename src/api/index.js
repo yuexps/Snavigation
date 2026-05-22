@@ -54,3 +54,11 @@ export const getSearchSuggestions = async (keyWord) => {
     return Promise.reject(error);
   }
 };
+
+// 获取一言的函数
+export const getHitokoto = async () => {
+  return axios({
+    method: "GET",
+    url: "https://v1.hitokoto.cn/",
+  });
+};
